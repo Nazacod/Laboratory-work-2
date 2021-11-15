@@ -154,6 +154,7 @@ namespace Lab1
                 v3.stepY = double.Parse(reader.ReadString(), CI);
                 v3.cntNodesX = int.Parse(reader.ReadString(), CI);
                 v3.cntNodesY = int.Parse(reader.ReadString(), CI);
+                v3.DataArray = new Vector2[v3.cntNodesY, v3.cntNodesX];
 
                 string[] elem = null;
 

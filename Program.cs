@@ -11,29 +11,33 @@ namespace Lab1
         {
             Console.WriteLine("Test 1\n\n");
             Test1();
-            Console.WriteLine("------------------------------------------------------------------");
-            Console.WriteLine("Test 2\n\n");
-            Test2();
+            //Console.WriteLine("------------------------------------------------------------------");
+            //Console.WriteLine("Test 2\n\n");
+            //Test2();
         }
 
         static void Test1()
-        {
+        {   
+            //28 and 38 strings are fixed!
+
             FdblVector2 f = FdblVector2Types.f2;
             V3DataArray array = new V3DataArray("Velocity", DateTime.Now, 3, 4, 1.0f, 1.0f, f);
             Console.WriteLine("Array until saving");
             Console.WriteLine(array.ToLongString("f"));
             V3DataArray.SaveBinary(filename, array);
-            V3DataArray.LoadBinary(filename, ref array);
+            V3DataArray array1 = new V3DataArray("Velocity", DateTime.Now, 0, 0, 1.0f, 1.0f, f); //fixed
+            V3DataArray.LoadBinary(filename, ref array1);
             Console.WriteLine("Array after saving");
-            Console.WriteLine(array.ToLongString("f"));
+            Console.WriteLine(array1.ToLongString("f"));
 
             V3DataList arrayConverted = (V3DataList)array;
             Console.WriteLine("Array until saving");
             Console.WriteLine(arrayConverted.ToLongString("f"));
             V3DataList.SaveAsText(filename, arrayConverted);
-            V3DataList.LoadAsText(filename, ref arrayConverted);
+            V3DataList v3List = new V3DataList("", new DateTime());
+            V3DataList.LoadAsText(filename, ref v3List); //fixed
             Console.WriteLine("Array after saving");
-            Console.WriteLine(arrayConverted.ToLongString("f"));
+            Console.WriteLine(v3List.ToLongString("f"));
         }
 
         static void Test2()

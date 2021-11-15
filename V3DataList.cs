@@ -8,7 +8,7 @@ namespace Lab1
 {
     class V3DataList : V3Data
     {
-        public List<DataItem> DataList { get; }
+        public List<DataItem> DataList { get; private set; }
         public V3DataList(string id, DateTime time) : base(id, time)
         {
             DataList = new List<DataItem>(100);
@@ -131,13 +131,16 @@ namespace Lab1
 
                 v3.id = reader.ReadLine();
                 v3.time = DateTime.Parse(reader.ReadLine(), CI);
+                v3.DataList.Clear();
 
+                string str = reader.ReadLine();
                 string[] elem = null;
 
-                while (reader.BaseStream.Length != reader.BaseStream.Position)
+                while (str != null)
                 {
-                    elem = reader.ReadLine().Split(' ');
+                    elem = str.Split(' ');
                     v3.Add(new DataItem(float.Parse(elem[0], CI), float.Parse(elem[1], CI), new Vector2(float.Parse(elem[2], CI), float.Parse(elem[3], CI))));
+                    str = reader.ReadLine();
                 }
             }
             catch (Exception ex)
