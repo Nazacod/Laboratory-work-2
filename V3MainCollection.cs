@@ -58,17 +58,9 @@ namespace Lab1
             {
                 if (mainList.Count != 0)
                 {
-                    IEnumerable<DataItem> list = from elem in (from data in mainList
-                                                               where data is V3DataList
-                                                               select (V3DataList)data)
-                                                 from item in elem
-                                                 select item;
-                    IEnumerable<DataItem> array = from elem in (from data in mainList
-                                                                where data is V3DataArray
-                                                                select (V3DataArray)data)
-                                                  from item in elem
-                                                  select item;
-                    IEnumerable<DataItem> DataItems = array.Union(list);
+                    var DataItems = from data in mainList
+                                    from item in data
+                                    select item;
 
                     return DataItems.Average(item => Math.Sqrt(item.x * item.x + item.y * item.y));
                 }
@@ -97,18 +89,10 @@ namespace Lab1
             get
             {
                 if (mainList.Count != 0)
-                {
-                    IEnumerable<DataItem> list = from elem in (from data in mainList
-                                                               where data is V3DataList
-                                                               select (V3DataList)data)
-                                                 from item in elem
-                                                 select item;
-                    IEnumerable<DataItem> array = from elem in (from data in mainList
-                                                                where data is V3DataArray
-                                                                select (V3DataArray)data)
-                                                  from item in elem
-                                                  select item;
-                    IEnumerable<DataItem> DataItems = array.Union(list);
+                {                 
+                    var DataItems = from data in mainList
+                                    from item in data
+                                    select item;
 
                     return DataItems.GroupBy(item => item.x);
                 }
