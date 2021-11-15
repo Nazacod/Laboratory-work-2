@@ -6,7 +6,7 @@ namespace Lab1
 {
     class Program
     {
-        private const string filename = @"C:\Users\zaxar\source\repos\Lab1\TextFile1.txt";
+        private const string filename = @"TextFile1.txt";
         static void Main(string[] args)
         {
             Console.WriteLine("Test 1\n\n");
@@ -40,6 +40,7 @@ namespace Lab1
         {
             FdblVector2 f = FdblVector2Types.f3;
             V3MainCollection mainCollection = new V3MainCollection();
+            V3MainCollection emptyCollection = new V3MainCollection();
             V3DataArray array = new V3DataArray("Velocity", DateTime.Now, 3, 4, 1.0f, 1.0f, f);
             V3DataArray array1 = new V3DataArray("Electricity", DateTime.Now, 2, 2, 1.0f, 1.0f, f);
             V3DataList array2 = new V3DataList("Density", DateTime.MinValue);
@@ -60,6 +61,11 @@ namespace Lab1
             Console.WriteLine("First request: Average lengths of points");
             double average = mainCollection.Average;
             Console.WriteLine(average);
+            Console.WriteLine("EmptyCollection");
+            Console.WriteLine(emptyCollection.ToLongString("f"));
+            Console.WriteLine("First request for empty: Average lengths of points");
+            double average_empt = emptyCollection.Average;
+            Console.WriteLine(average_empt);
             Console.WriteLine();
 
 
@@ -70,6 +76,19 @@ namespace Lab1
             foreach (var el in diametr)
             {
                 Console.WriteLine(el);
+            }
+            Console.WriteLine("EmptyCollection");
+            Console.WriteLine(emptyCollection.ToLongString("f"));
+            Console.WriteLine("Second request for empty: Difference between maximum and minimum absolute value of field");
+            IEnumerable<float> diametr_empt = emptyCollection.DiaField;
+            if (diametr_empt == null) Console.WriteLine("NULL");
+            else
+            {
+                foreach (var el in diametr_empt)
+                {
+                    Console.WriteLine(el);
+                }
+                Console.WriteLine();
             }
             Console.WriteLine();
 
@@ -84,7 +103,11 @@ namespace Lab1
                     Console.WriteLine(item);
                 }
             }
-            Console.WriteLine();
+            Console.WriteLine("EmptyCollection");
+            Console.WriteLine(emptyCollection.ToLongString("f"));
+            Console.WriteLine("Third request for empty: Group DataItem's by X");
+            IEnumerable<IGrouping<double, DataItem>> group_empt = emptyCollection.GroupByX;
+            if (group_empt == null) Console.WriteLine("NULL");
         }
     }
 }
